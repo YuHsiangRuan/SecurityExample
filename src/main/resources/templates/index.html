@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<title>Index</title>
+	
+	<link th:href="@{/css/style.css}" href="../css/style.css" rel="stylesheet"/>
+    <style>
+    
+    	#header {
+    		width: 100%;
+    		height: 50px;
+    		text-align: center;
+    		padding: 5px;
+    	}
+    
+    	#p {
+	    	font-family: impact;
+	    	font-size:300%;
+	    	color: black;
+	    }
+    	
+    	.starter-template {
+    		padding:40px 15px;
+    		text-align: center;
+    	}
+    	
+    	.btn {
+    		background-color: #00EBEB;
+    		text-align: center;
+    		border-width: 5px; 
+    		border-style: solid;
+    		border-color: #00EBEB;
+    		font-family: arial;
+    	}
+    	
+    	.info1 {
+    		width: 100%;
+    		background-color: #FFFF45;
+    		text-align: center;
+    	}
+    	
+    	.info2 {
+    		width: 100%;
+    		background-color: #FF3030;
+    		text-align: center;
+    	}
+    	
+    	.info3 {
+    		width: 100%;
+    		background-color: #C2C2FF;
+    		text-align: center;
+    	}
+    </style>
+</head>
+<body>
+	
+	<div id="header">
+		<a th:href="@{/}"><div id="p">Security</div></a>
+	</div>
+	
+	<div class="container">
+		<div class="starter-template">
+			<h1 th:text="${msg.title}"></h1>
+			<p class="info1" th:text="${msg.content}"></p>
+			
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<p class="info2" th:text="${msg.etraInfo}"></p>
+			</div>
+			
+			<div sec:authorize="hasRole('ROLE_USER')">
+				<p class="info3">無額外內容</p>
+			</div>
+			
+			<form th:action="@{/logout}" method="POST">
+				<input type="submit" class="btn" value="登出"></input>
+			</form>
+			
+		</div>
+	</div>
+	
+	
+	
+	
+</body>
+</html>
